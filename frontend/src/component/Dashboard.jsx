@@ -1,12 +1,11 @@
 import React, { useEffect, useRef, useState, memo } from "react";
 import { FixedSizeList as List } from "react-window";
 
-/* CONFIG */
+
 const ROW_HEIGHT = 48;
 const LIST_HEIGHT = 500;
 const MAX_RECORDS = 8000;
 
-/* ROW (memoized to avoid re-renders) */
 const Row = memo(({ index, style, data }) => {
   const record = data[index];
   if (!record) return null;
@@ -27,7 +26,7 @@ const Dashboard = () => {
   const [records, setRecords] = useState([]);
   const counterRef = useRef(1);
 
-  /* SIMULATED HIGH-FREQUENCY DATA */
+
   useEffect(() => {
     const interval = setInterval(() => {
       const newRecord = {
@@ -42,7 +41,7 @@ const Dashboard = () => {
           ? next.slice(-MAX_RECORDS)
           : next;
       });
-    }, 200); // high frequency
+    }, 200);
 
     return () => clearInterval(interval);
   }, []);
@@ -53,7 +52,7 @@ const Dashboard = () => {
         High-Frequency Data Monitoring Dashboard
       </h1>
 
-      {/* STATS */}
+    
       <div className="grid grid-cols-3 gap-4 mb-6">
         <div className="bg-white p-4 rounded shadow">
           <p className="text-sm text-gray-500">Total Records</p>
@@ -69,7 +68,7 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* VIRTUALIZED TABLE */}
+    
       <div className="bg-white rounded shadow">
         <div className="grid grid-cols-3 px-4 py-3 bg-gray-600 font-semibold border-b">
           <span>ID</span>
